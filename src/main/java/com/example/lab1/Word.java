@@ -8,7 +8,10 @@ public class Word {
 
     Word(){}
     Word(int id, int level, String word, String meaning){
-
+        setId(id);
+        setLevel(level);
+        setMeaning(meaning);
+        setWord(word);
     }
 
     public void setId(int id) {
