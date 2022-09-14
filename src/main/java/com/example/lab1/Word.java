@@ -57,4 +57,8 @@ public class Word {
 
         return str;
     }
+
+    public String fileString(){
+        return this.level + "|" + this.word + "|" + this.meaning ;
+    }
 }

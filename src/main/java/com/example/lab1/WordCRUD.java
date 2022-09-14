@@ -1,9 +1,6 @@
 package com.example.lab1;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -135,5 +132,22 @@ public class WordCRUD implements ICRUD {
             e.printStackTrace();
         }
 
+    }
+
+    public void save() {
+        try {
+            PrintWriter p = new PrintWriter(new FileWriter("example.txt"));
+
+            for(Word one: list){
+                p.write(one.fileString() + "\n");
+            }
+
+            p.close();
+
+            System.out.println("==> 데이터 저장 완료 !!!");
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
