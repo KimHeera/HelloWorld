@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class WordCRUD implements ICRUD {
     ArrayList<Word> list;
     Scanner s;
-    final String fname = "target/Dictionary.txt";
+    final String fname = "word.txt";
 
     WordCRUD(Scanner s) {
         list = new ArrayList<>();
@@ -68,8 +68,23 @@ public class WordCRUD implements ICRUD {
             j++;
         }
         System.out.println("———————————————");
-
         return idlist;
+    }
+
+    public void listAll(int level){
+        int j = 0;
+
+        System.out.println("———————————————");
+        for(int i=0; i<list.size(); i++) {
+            int thisLevel = list.get(i).getLevel();
+
+            if(thisLevel != level) continue;
+
+            System.out.print((j+1) + " ");
+            System.out.println(list.get(i).toString());
+            j++;
+        }
+        System.out.println("———————————————");
     }
 
     public void updateItem() {
@@ -136,7 +151,7 @@ public class WordCRUD implements ICRUD {
 
     public void save() {
         try {
-            PrintWriter p = new PrintWriter(new FileWriter("example.txt"));
+            PrintWriter p = new PrintWriter(new FileWriter(fname));
 
             for(Word one: list){
                 p.write(one.fileString() + "\n");
@@ -149,5 +164,17 @@ public class WordCRUD implements ICRUD {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void levelSearch() {
+        System.out.println("=> 원하는 레벨은? (1~3) ");
+        int level = s.nextInt();
+        listAll(level);
+    }
+
+    public void wordSearch() {
+        System.out.println("=> 원하는 단어는? ");
+        String input = s.next();
+        listAll(input);
     }
 }
